@@ -1,11 +1,71 @@
 .features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
+  padding: 3rem 0 1rem;
   width: 100%;
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+/* The whole card is the link, so the screenshot and the arrow share one hit
+   target and one hover state. */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 2rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  background: var(--ifm-card-background-color, var(--ifm-background-surface-color));
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+/* Screenshots are wide and dark. Crop to a consistent band from the top so the
+   cards line up regardless of the source image's height. */
+.shot {
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  background: var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-heading-color);
+}
+
+.cardText {
+  flex: 1;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.75rem;
+}
+
+.cardLink {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding-top: 2rem;
+  }
 }

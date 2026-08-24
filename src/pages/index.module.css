@@ -3,11 +3,22 @@
  * and scoped locally.
  */
 
+/* The hero paints itself rather than borrowing --ifm-color-primary: that token
+   is a pale lavender in dark mode, which turned the band into a light stripe
+   across a dark page and left the outline button barely visible. One deep
+   violet reads correctly in both themes. */
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+  color: #fff;
+}
+
+.heroBanner :global(.hero__title),
+.heroBanner :global(.hero__subtitle) {
+  color: #fff;
 }
 
 @media screen and (max-width: 996px) {
@@ -20,4 +31,48 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* The audience router, directly under the hero: three ways in, so nobody has to
+   guess which docs section is theirs. */
+.paths {
+  padding: 2.5rem 0 0.5rem;
+}
+
+.pathCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.pathCard:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+}
+
+.pathEyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+}
+
+.pathTitle {
+  font-size: 1.1rem;
+  margin: 0.4rem 0 0.4rem;
+  color: var(--ifm-heading-color);
+}
+
+.pathBody {
+  margin: 0;
+  color: var(--ifm-color-emphasis-700);
 }

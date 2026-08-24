@@ -1,57 +1,108 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Heading from '@theme/Heading';
-import styles from './styles.module.css';
+import type { ReactNode } from "react";
+import Link from "@docusaurus/Link";
+import Heading from "@theme/Heading";
+import styles from "./styles.module.css";
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  // Real product screenshots, required straight out of docs/ so the front page
+  // can never drift from what the docs show. Re-shoot one and both update.
+  image: string;
+  alt: string;
   description: ReactNode;
+  to: string;
+  linkLabel: string;
+  // Where the 16:8 crop bites. Defaults to the top, which is right for the
+  // wide app screenshots; the Discord shot is tall and its embed sits lower.
+  focal?: string;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Scrims that run themselves',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: "Scrims that run themselves",
+    image: require("@site/docs/scrims/assets/slotlist.png").default,
+    alt: "A scrim's slot board, with teams in numbered slots",
     description: (
       <>
         Set the times once. Finalist opens registration, fills slots, backfills
         the waitlist, reveals room details and closes out the scrim on schedule.
       </>
     ),
+    to: "/docs/scrims/overview",
+    linkLabel: "How scrims work",
   },
   {
-    title: 'Nobody shows up short',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: "Nobody shows up short",
+    image: require("@site/docs/scrims/assets/waitlist-manage.png").default,
+    alt: "The host's waitlist, with promote and demote controls",
     description: (
       <>
         Pre-match filters check every lineup before start. Missing in-game names
         and undersized rosters are removed, and waiting teams take their slots.
       </>
     ),
+    to: "/docs/scrims/registrations-and-slots",
+    linkLabel: "Slots and the waitlist",
   },
   {
-    title: 'Right there in Discord',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: "Brackets, groups and points",
+    image: require("@site/docs/tournaments/assets/standings.png").default,
+    alt: "A tournament stage's standings, with the qualification cut",
+    description: (
+      <>
+        Run something bigger than one lobby. Stages draw themselves, standings
+        recompute on every confirmed match, and the qualification cut is drawn
+        where everyone can see it.
+      </>
+    ),
+    to: "/docs/tournaments/overview",
+    linkLabel: "Tournaments",
+  },
+  {
+    title: "Right there in Discord",
+    image: require("@site/docs/discord/assets/room-details-announcement.png")
+      .default,
+    alt: "The room-details announcement embed in a Discord channel",
     description: (
       <>
         Connect a server and announcements land in your channel. Captains reveal
         their own lobby credentials, and only they can.
       </>
     ),
+    to: "/docs/discord/connect-server",
+    linkLabel: "Connect your server",
+    focal: "center",
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({
+  title,
+  image,
+  alt,
+  description,
+  to,
+  linkLabel,
+  focal,
+}: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
+    <div className="col col--6">
+      <Link to={to} className={styles.card}>
+        <div className={styles.shot}>
+          <img
+            src={image}
+            alt={alt}
+            loading="lazy"
+            style={focal ? { objectPosition: focal } : undefined}
+          />
+        </div>
+        <div className={styles.cardBody}>
+          <Heading as="h3" className={styles.cardTitle}>
+            {title}
+          </Heading>
+          <p className={styles.cardText}>{description}</p>
+          <span className={styles.cardLink}>{linkLabel} →</span>
+        </div>
+      </Link>
     </div>
   );
 }
@@ -61,8 +112,8 @@ export default function HomepageFeatures(): ReactNode {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>

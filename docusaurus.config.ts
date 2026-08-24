@@ -7,7 +7,7 @@ import { links } from "./constants";
 
 const config: Config = {
   title: "Finalist",
-  tagline: "Run scrims your community actually shows up for",
+  tagline: "Run scrims and tournaments your community actually shows up for",
   favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
