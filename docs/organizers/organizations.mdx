@@ -28,9 +28,14 @@ You are the **owner** of any org you create this way.
 
 ### From Discord
 
-Invite the bot to a Discord server and Finalist provisions an organization for it
-automatically, named after the server, with a slug derived from that name. It arrives
-**unclaimed**: no owner, no members, until someone claims it with `/claim` or from the web.
+Invite the bot to a Discord server, then **claim** it — with `/claim` in Discord, or from
+the web with the Discord account that added the bot. Claiming is what creates the
+organization: named after the server, with a slug derived from that name, owned by whoever
+claimed it.
+
+Inviting the bot on its own creates nothing. The install is recorded and the server sits
+**pending** until somebody claims it, which is why a drive-by install never leaves you
+owning an org you didn't ask for.
 
 This is the shortest path from nothing to hosting, and it's covered in
 [Connect your server](../discord/connect-server).
@@ -58,8 +63,8 @@ Members join by **invitation only**. There's no request-to-join flow, and no pub
 | **Admin** | Every org action except transferring ownership. |
 | **Moderator** | A limited set of moderation actions. |
 
-There is exactly one owner at a time. An org you create is owned by you; an org created from
-a Discord install has no owner at all until it's claimed.
+There is exactly one owner at a time, and an organization always has one — the account that
+created it, or the account that claimed the Discord server it came from.
 
 ![Organization members and their roles](./assets/org-members.png)
 
@@ -97,6 +102,12 @@ Organizations keep their own ban lists, separate from Discord's.
 
 Bans are per-organization. Banning someone from your org does not affect any other org.
 
+## Reports and moderation
+
+Players report each other from inside your scrims, and those reports land in **your** queue
+— there's no platform tier above you. See [Player reports](./reports) and
+[Moderating scrim chat](./chat-moderation).
+
 ## Audit log
 
 Every consequential action is recorded: org created, claimed or updated, ownership transferred,
@@ -107,5 +118,11 @@ There's also an access log showing member activity in the org.
 
 ## Connecting Discord
 
-An org can connect Discord servers to receive announcements. See
-[Connect your server](../discord/connect-server).
+An org can connect Discord servers to receive announcements, choose which channels get what,
+ping roles, lock channels when registration closes, and give the bot a per-server nickname
+and avatar. See [Connect your server](../discord/connect-server).
+
+## Plan
+
+Every organization is currently on the `founder` plan: every feature, no limits, no
+charge. See [Plans and limits](../reference/plans).

@@ -1,0 +1,49 @@
+---
+sidebar_position: 3
+---
+
+import { links } from '@site/constants';
+
+# Public pages and share links
+
+Plenty of Finalist is readable without an account. That's deliberate — a scrim you can only
+see by signing up is a scrim nobody shares.
+
+| Page | URL | Shows |
+|------|-----|-------|
+| Organization | `finalist.live/o/<slug>` | Identity, hosted public scrims and tournaments, player and team leaderboards. |
+| Scrim | `finalist.live/scrims/p/<share id>` | Status, times, slot list, waitlist, declared results, and the chat (read-only). |
+| Tournament | `finalist.live/tournaments/p/<share id>` | Format, stages, entrants, matches, standings and prizes. |
+| Team | `finalist.live/t/<team code>` | Roster and declared record across scrims and tournaments. |
+| Player | `finalist.live/u/<username>` | Profile and recent match history. |
+
+## Share ids
+
+Every event carries a **12-character share id** in its URL. It's the same id the Discord bot
+takes:
+
+```
+/scrim view x7Kq2mNp9wLd
+```
+
+The option autocompletes in Discord, so you rarely type one out.
+
+Private scrims and private tournaments additionally carry an **invite code**. The share page
+is what you post publicly; the invite link is what actually lets a team in.
+
+## What never appears on a public page
+
+Room details, invite codes, waitlist positions on a private event, entry attachments,
+rejection reasons, and anything else that's decided per-viewer. Authorization is checked on
+the server for each of those, not hidden by the page.
+
+A **draft** scrim or tournament has no public page at all — the link 404s until you publish.
+
+## Discovery
+
+Finalist publishes a sitemap of organization and event pages, so a scrim you published is
+findable rather than merely reachable. Pages carry proper titles, descriptions and social
+cards, so a link pasted into Discord or WhatsApp unfurls into something readable.
+
+If you'd rather an event weren't listed, a **tournament** can be set to **unlisted** —
+reachable by link, absent from listings — and a **scrim** can be set to private.

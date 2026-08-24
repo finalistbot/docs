@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Roles and permissions
 
-Finalist has three independent role systems. They don't overlap, and confusing them is the
+Finalist has several independent role systems. They don't overlap, and confusing them is the
 usual source of "why can't I do this?".
 
 ## In a team
@@ -30,6 +30,44 @@ Membership is by invitation only. Invites expire after 7 days.
 An owner can hand the org to any existing member; doing so leaves the outgoing owner in the
 org as an admin. An org created by inviting the bot to a Discord server starts with **no
 owner** until somebody [claims](../discord/connect-server) it.
+
+## In a tournament
+
+Tournaments layer their own **staff roles** on top of org membership, so you can trust a
+referee for one weekend without making them a moderator of your whole organization.
+
+| Role | Can |
+|------|-----|
+| **Owner** | Everything. Conferred at creation, never granted. |
+| **Admin** | Reconfigure the event, its stages, prizes and staff. |
+| **Referee** | Run matches: check-in, results, disputes. |
+| **Caster** | Read-only. |
+
+See [Running a tournament](../tournaments/running#staff).
+
+## In a scrim's chat
+
+Chat resolves your standing per scrim, from your stake in *that* scrim. Ranks are ordered:
+a higher rank clears every gate a lower one does.
+
+| Rank | Who |
+|------|-----|
+| **organizer** | The scrim's creator, or an org owner/admin. |
+| **moderator** | An org moderator. |
+| **player** | Your team holds a slot. |
+| **waitlist** | Your team is registered, not slotted. |
+| **viewer** | Signed in, no stake in this scrim. |
+
+Organizers and moderators bypass the posting rules (mode, slow mode, repeat-blocking)
+entirely. See [Moderating scrim chat](../organizers/chat-moderation).
+
+## Moderation thresholds
+
+| Action | Needs |
+|--------|-------|
+| Work the [report queue](../organizers/reports) — claim, triage, resolve | Moderator |
+| Moderate chat in one scrim | Moderator |
+| Org-wide chat sanctions, player and team bans | Admin |
 
 ## In Discord
 

@@ -77,6 +77,71 @@ Tips:
 | `room-details-announcement.png` | The room-details announcement embed with the "Reveal room details" button. |
 | `room-details-reveal.png` | The private reveal a slotted captain sees after clicking the button. |
 
+## `docs/tournaments/assets/`: Tournaments
+
+| File | What to capture |
+|------|-----------------|
+| `tournament-list.png` | The Tournaments list on play.finalist.live, with at least one event open for entry. |
+| `tournament-public-page.png` | A public tournament page at finalist.live/tournaments/p/…, showing format and stages. |
+| `create-tournament.png` | The new-tournament wizard, Basics step: game, name, visibility. |
+| `tournament-entry-rules.png` | The Entry rules step: max teams, minimum lineup, require IGN, check-in toggles. |
+| `add-stage.png` | The Add-a-stage dialog with a BR points config filled in (groups, matches per group, scoring). |
+| `stages-panel.png` | The Stages tab with two stages, one **Drawn**, one **Not drawn**. |
+| `draw-stage.png` | The Draw dialog: random seed, schedule from, minutes between rounds. |
+| `entries-panel.png` | The Entries tab with a mix of statuses and a seed set. |
+| `match-room-details.png` | The per-match Room details dialog, with **Publish to captains** and a reveal time. |
+| `match-results.png` | A match's result sheet: place and kills per team, before confirming. |
+| `submissions-queue.png` | The Submissions queue, with a captain's claim and its screenshot. |
+| `standings.png` | A stage's standings, ideally with the qualification cut visible. |
+| `prizes-payouts.png` | The Prizes tab: rank bands above, payout sheet below. |
+| `tournament-checkin.png` | A player checking their team in for a match, on the event page. |
+
+## New shots for `docs/players/assets/`
+
+| File | What to capture |
+|------|-----------------|
+| `scrim-chat.png` | The chat panel on a scrim page, with a few messages and visible rank badges (organizer / player / viewer). |
+| `report-dialog.png` | The report dialog with the six categories listed. |
+| `saved-game-accounts.png` | Game identities for one game with two saved accounts, one marked primary. |
+| `entry-attachments-player.png` | The file picker on a registration form, with the host's note above it. |
+
+## New shots for `docs/organizers/assets/`
+
+| File | What to capture |
+|------|-----------------|
+| `chat-settings.png` | The chat settings popover: modes, slow mode, the toggles. |
+| `punish-chatter.png` | The Moderate dialog: action, duration, scope. |
+| `reports-queue.png` | The report queue with a few open cases. |
+| `report-case.png` | A case detail: its filings, the target's history, the resolve controls. |
+| `entry-evidence-settings.png` | Entry evidence set to Required with a note written. |
+| `entry-evidence-review.png` | An entry's attachments as staff see them. |
+
+## New shots for `docs/discord/assets/`
+
+| File | What to capture |
+|------|-----------------|
+| `welcome-card.png` | The welcome card the bot posts on join, with **Claim this server**. |
+| `register-button.png` | A registration-open announcement with its **Register** button, or the confirm panel it opens. |
+| `tournament-command.png` | A `/tournament standings` reply showing a points table. |
+
+---
+
+## Reproducing the states locally
+
+Most of the new shots need data the dev seed doesn't create. Fastest paths:
+
+- **Tournaments** — create one from `app.finalist.live` (or `localhost:3001`) → Tournaments
+  → New. Add two stages, register two or three seeded teams, close registration, draw the
+  first stage. That single event covers every tournament shot except the public page.
+- **Chat** — open a scrim page as the organizer in one browser and as a player in another
+  (or a private window). Post a couple of messages so badges differ.
+- **Reports** — file one from the player window (report a chat message), then open
+  Reports in the organizer window.
+- **Entry attachments** — set Entry evidence to *Required* on a scrim before opening
+  registration, then register from the player window.
+- **Discord shots** — need a real server with the bot in it. The welcome card only fires on
+  join, so use a throwaway server.
+
 ---
 
 ## Checking your work

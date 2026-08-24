@@ -1,0 +1,108 @@
+---
+sidebar_position: 2
+---
+
+# Stages and formats
+
+A tournament is made of **stages**, played in order. Each stage picks a **format**, and the
+format decides three things: how entrants are divided up, what a match looks like, and how
+the table is scored.
+
+You can mix them. A qualifier as BR points, then a single-elimination final, is two stages
+in one event.
+
+## The formats
+
+| Format | Shape | What you configure |
+|--------|-------|--------------------|
+| **BR points** | Lobbies × matches, scored on a points table | Groups, groups per lobby, matches per group, map rotation, points, tiebreakers |
+| **Round robin** | Everyone plays everyone | Divisions, double round, best-of, points, draws |
+| **Single elimination** | Knockout bracket | Best-of, third-place match |
+| **Double elimination** | Winners + losers brackets | Best-of, grand-final best-of, bracket reset |
+| **Swiss** | Paired by record, nobody is eliminated | Rounds, best-of, avoid rematches |
+| **Gauntlet** | Seeded stepladder | Best-of |
+
+Configuration is validated **when you save the stage**, not on match day. A setting that
+can't work is rejected there and then, with the reason.
+
+## Advancement
+
+Every stage says what happens to the teams in it:
+
+| Advancement | Meaning |
+|-------------|---------|
+| Final stage | Nobody advances. This is the end of the event. |
+| Top N from each group | The cut is applied per group. |
+| Top N overall | The cut is applied to the stage-wide table. |
+
+The qualification cut shows up in the standings as a marked line, so players can see where
+they stand relative to it while the stage is still running.
+
+## BR points in detail
+
+This is the format most Indian and SEA mobile events use, so it's worth understanding.
+
+**Groups and lobbies.** Split the field into groups (A–D, say), then set **groups per
+lobby**. At `1`, each group plays its own lobbies and never meets the others. Above `1`,
+Finalist generates a **balanced rotation** in which every group meets every other group the
+same number of times across the stage.
+
+The number of groups must divide evenly by groups per lobby. If it doesn't, some group
+would sit out a round — so it's rejected when you save the stage, rather than discovered
+halfway through the day.
+
+**Matches per group.** How many lobbies each group plays.
+
+**Maps.** A list, rotated per round.
+
+**Points.** A placement table plus kill points, with an optional kill cap:
+
+```
+1st: 10   2nd: 6   3rd: 5   4th: 4   5th: 3   6th: 2   7th: 1   8th: 1
++1 per kill
+```
+
+**Tiebreakers**, applied in order. The default chain is points → WWCD (wins) → kills →
+best placement → last match placement.
+
+### Scoring templates
+
+Rather than typing a table in, pick a preset:
+
+| Preset | What it is |
+|--------|-----------|
+| **BGMI Official** | Krafton's standard BGMI/PMGC table: 10 for the WWCD sliding to 1, plus 1 per kill. |
+| **PUBG Official** | The PUBG Esports table used for PC events. |
+| **Free Fire Official** | Garena's table: 12 for the Booyah down to 1 for 10th, plus 1 per kill. |
+| **COD Mobile Battle Royale** | Placement-weighted, 1 point per kill. |
+| **Kills only** | No placement points. Every frag is a point — warm-ups and kill races. |
+| **Placement only** | Placement points with no kill reward, when survival should decide it. |
+
+Presets are copied into the stage when you pick one, so editing the preset later never
+rewrites an event that's already being played. Anything you set explicitly overrides what
+the preset brought in. Organizations can save their own templates too.
+
+## Points are computed, never submitted
+
+A result sheet carries **placement and kills**. Points come from the stage's table, priced
+server-side, and are then **frozen** on the row.
+
+Two consequences:
+
+- A captain, a referee, or a bug cannot enter "we got 34 points". They enter what happened;
+  the table decides what it's worth.
+- Changing a stage's points table later does not silently rewrite matches that were already
+  confirmed under the old one.
+
+## Standings
+
+Each row carries points, kills, wins, and best / average / last placement — plus
+**`tiebreak`**: the ordered comparisons that actually decided that position.
+
+That last field is the point. A table that looks wrong can be checked instead of argued
+about: you can see that a team is 3rd because of kills, not points.
+
+![A stage's standings, with the qualification cut](./assets/standings.png)
+
+Standings are maintained per group *and* stage-wide at the same time. Confirming a match
+recomputes them in the same transaction that saves it.

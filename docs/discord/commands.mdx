@@ -26,9 +26,9 @@ category, and `/help command:<name>` jumps straight to one. Four link buttons si
 **Support Server**, **Invite Me**, **Documentation** and **Tutorials** — *Invite Me* is the
 quickest way to add the bot to another server.
 
-`/claim` is global for a reason: a server that has just had the bot added holds an
-**unclaimed** organization, and the command has to work there before anything else does.
-See [Connect your server](./connect-server).
+`/claim` is global for a reason: a server that has just had the bot added has no
+organization yet — `/claim` is what creates it — so the command has to work before anything
+else does. See [Connect your server](./connect-server).
 
 ## `/scrim`: browse and enter scrims
 
@@ -38,6 +38,7 @@ the option autocompletes, so you rarely type it.
 | Command | Options | What it does |
 |---------|---------|--------------|
 | `/scrim list` | None | Active scrims, grouped into Live, Open for registration, and Upcoming. |
+| `/scrim registered` | None | The active scrims you have a team in, soonest first. |
 | `/scrim view` | `scrim` (required) | Status, start time, registration window and slot list. |
 | `/scrim register` | `scrim` (required), `team` (optional) | Registers your team. Only the captain can. |
 | `/scrim unregister` | `scrim` (required), `team` (optional) | Withdraws your team. |
@@ -47,6 +48,28 @@ the option autocompletes, so you rarely type it.
 ![/scrim list when the organization has nothing running](./assets/scrim-list-command.png)
 
 `team` is optional. If you captain exactly one team, the bot uses it.
+
+## `/tournament`: multi-stage events
+
+Follow an event, check in, and send your result. Everything organizer-side — creating
+events, drawing stages, confirming results — stays on the web. See
+[Tournaments](../tournaments/overview).
+
+| Command | Options | What it does |
+|---------|---------|--------------|
+| `/tournament list` | None | Open and live tournaments, newest first. |
+| `/tournament info` | `tournament` (required) | Status, start time, registration window, stage-by-stage format, prize pool. |
+| `/tournament standings` | `tournament` (required) | The current stage's points table, with the qualification cut marked. |
+| `/tournament matches` | `tournament` (required) | Your team's fixtures, with the match ids the next two commands take. |
+| `/tournament checkin` | `match` (required) | Confirms your team for a match. Miss the window and the slot is forfeited. |
+| `/tournament room` | `match` (required) | Your lobby's room ID and password. Always private. |
+| `/tournament result` | `match`, `placement`, `kills`, `screenshot` (required), `note` (optional) | Submits your result for a referee to confirm. |
+| `/tournament enter` | `tournament` (required) | Opens the entry page — lineups need a roster picker, so this one lives on the web. |
+
+![/tournament standings](./assets/tournament-command.png)
+
+The `tournament` option autocompletes; for `matches`, `checkin` and `room` it lists events
+you're actually in.
 
 ## `/team`: your teams
 
@@ -92,6 +115,10 @@ channel bindings that drive announcements.
 
 ## Replies are private
 
-Everything that shows *your* data (`/link`, `/me *`, `/team mine`, `/host *`,
-`/scrim unregister`) replies ephemerally, so only you see it. `/scrim list`,
+Everything that shows *your* data (`/link`, `/me *`, `/team mine`, `/team create`,
+`/host *`, `/scrim registered`, `/scrim unregister`, and every `/tournament` command that
+concerns your own team) replies ephemerally, so only you see it. `/scrim list`,
 `/scrim view` and `/team view` post publicly, since they are meant to be shared.
+
+`/tournament room` is **always** private, whatever the channel. A room ID in a public
+channel is a room everyone can join.

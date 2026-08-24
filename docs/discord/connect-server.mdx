@@ -29,13 +29,13 @@ on that server — that part is Discord's rule, not ours.
 
 Inviting the bot is the whole setup.
 
-Finalist notices the bot joining and provisions an organization for that server on the
-spot, named after it. You don't fill in a form, and you don't have to visit the dashboard
-first.
+Finalist records the install and links it to your server, but it does **not** create an
+organization yet. The organization is created by **whoever claims the server** — so a
+drive-by install leaves a pending link and nothing else, rather than an ownerless org
+nobody asked for.
 
-That organization arrives **unclaimed**: it exists and it's linked to your server, but it
-has no owner and no members yet. Claiming it is the next step, and until someone does,
-nobody can host with it.
+Until someone claims it, the server sits in a **pending** state: the bot knows about it,
+and the organizer commands answer "this server isn't claimed yet".
 
 ### Claim it
 
@@ -43,20 +43,30 @@ Whoever added the bot is recorded as the **pending owner**. Finalist works that 
 the server's audit log, which is the reason the invite asks for **View Audit Log**. If it
 can't read the log, it falls back to the server's owner.
 
+The bot helps you along:
+
+- A **welcome card** is posted when it joins, carrying a **Claim this server** button.
+- The person who added it gets the same thing as a DM.
+- If nobody claims it, Finalist follows up later with a reminder DM to the inviter and the
+  server owner. It stops chasing someone whose DMs are closed.
+
+![The welcome card, with Claim this server](./assets/welcome-card.png)
+
 There are two ways to claim, and the first valid one wins:
 
 **In Discord**, run `/claim`. Any member with **Manage Server** can, not just the inviter.
-Ownership goes to the Finalist account linked to their Discord. If their Discord isn't
-linked yet, the bot says so and they can [link](./link-account) and run it again.
+The organization is created there and then, named after the server, owned by the Finalist
+account linked to their Discord. No account at all? The reply carries a one-tap link that
+makes one and claims the server in the same step.
 
 ![Claiming the server's organization with /claim](./assets/claim-command.png)
 
 **On the web**, sign in with the Discord account that added the bot. The server shows up as
 claimable and you take it in one click.
 
-Whoever claims it becomes the **owner**, and from there it's an ordinary organization: invite
-members, give them roles, and [hand ownership on](../organizers/organizations#transferring-ownership)
-later if you want.
+Either way you end up the **owner** of an ordinary organization: invite members, give them
+roles, and [hand ownership on](../organizers/organizations#transferring-ownership) later if
+you want.
 
 ## If you already have an organization
 
@@ -85,9 +95,8 @@ Until a server is linked to an organization, the bot only exposes `/link`, `/hel
 `/claim`. Everything else (`/scrim`, `/team`, `/me`, `/org`, `/host`) appears the moment
 the link exists, and disappears again if you disconnect.
 
-Because inviting the bot links the server straight away, those commands usually show up
-immediately. `/host` is the exception: it needs an org **owner** or **admin**, and an
-unclaimed org has neither. Claim first, then host.
+A pending install has no organization behind it yet, so those commands stay dark until
+somebody claims the server. Claim first, then everything else.
 
 ## Choose where announcements are posted
 
@@ -117,6 +126,36 @@ To stop announcements in a channel:
 /host unbind
 ```
 
+## Channels and roles, from the dashboard
+
+`/host bind` is the quick way. The full set of controls is on the dashboard, under
+**Settings → Discord**, where each bound channel carries its own purposes:
+
+| Purpose | What it does |
+|---------|--------------|
+| **Announcements** | Status updates: registration open/closed, live, results. |
+| **Registration updates** | A message each time a team joins or leaves. |
+| **Read-only when registration closes** | Locks the channel when registration closes and reopens it when it opens. Moderation only — it doesn't change who can register. Needs Manage Channels/Roles. |
+
+A scrim can also carry **scrim-specific channels**, so one event announces somewhere of its
+own without touching the organization's default channels.
+
+Roles get bound the same way, with one of two purposes:
+
+| Purpose | Effect |
+|---------|--------|
+| **Mention on posts** | The role is pinged on announcements. |
+| **Keep access when locked** | The role keeps talking in a channel that has been locked. |
+
+### The bot's face in your server
+
+Discord lets a bot look different in every server. Set a **nickname, avatar, banner and
+bio** for your server from the same settings page and the bot wears them there.
+
+Unlike message delivery, this one reports back: if Discord refuses the change — missing
+Change Nickname permission, an oversized image, a bad format — the dashboard tells you
+instead of failing quietly.
+
 ## What gets posted
 
 Once a channel is bound, Finalist posts an embed whenever a scrim changes state.
@@ -131,6 +170,21 @@ Once a channel is bound, Finalist posts an embed whenever a scrim changes state.
 
 Each embed links back to the scrim's page. Room details are posted separately. See
 [Room details](./room-details).
+
+### Registering from the announcement
+
+The **registration open** announcement carries a **Register** button, and it's the fastest
+path a captain has.
+
+Pressing it opens a panel showing exactly who would be entered — names and in-game names,
+taken from the team's default lineup — and one more tap enters them. It doesn't build a
+lineup; it confirms one. In-game names edited on the panel are submitted *with* the
+registration, so a scrim that requires IGNs still accepts the entry.
+
+![The Register button on a registration-open announcement](./assets/register-button.png)
+
+Who you are is decided by the backend from your linked Discord account, so the button is
+safe in a public channel: it can only ever register *your* team.
 
 Delivery is best-effort: if Discord is unreachable, or a member has DMs closed, the
 scrim itself is unaffected.
