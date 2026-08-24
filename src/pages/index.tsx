@@ -64,17 +64,15 @@ function HomepagePaths() {
   return (
     <section className={styles.paths}>
       <div className="container">
-        <div className="row">
+        <div className={styles.pathGrid}>
           {PATHS.map((path) => (
-            <div className="col col--4" key={path.to}>
-              <Link to={path.to} className={styles.pathCard}>
-                <span className={styles.pathEyebrow}>{path.eyebrow}</span>
-                <Heading as="h3" className={styles.pathTitle}>
-                  {path.title}
-                </Heading>
-                <p className={styles.pathBody}>{path.body}</p>
-              </Link>
-            </div>
+            <Link to={path.to} className={styles.pathCard} key={path.to}>
+              <span className={styles.pathEyebrow}>{path.eyebrow}</span>
+              <Heading as="h3" className={styles.pathTitle}>
+                {path.title}
+              </Heading>
+              <p className={styles.pathBody}>{path.body}</p>
+            </Link>
           ))}
         </div>
       </div>

@@ -85,8 +85,7 @@ function Feature({
   focal,
 }: FeatureItem) {
   return (
-    <div className="col col--6">
-      <Link to={to} className={styles.card}>
+    <Link to={to} className={styles.card}>
         <div className={styles.shot}>
           <img
             src={image}
@@ -101,9 +100,8 @@ function Feature({
           </Heading>
           <p className={styles.cardText}>{description}</p>
           <span className={styles.cardLink}>{linkLabel} →</span>
-        </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }
 
@@ -111,7 +109,7 @@ export default function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={styles.grid}>
           {FeatureList.map((props) => (
             <Feature key={props.title} {...props} />
           ))}

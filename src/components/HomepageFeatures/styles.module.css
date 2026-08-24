@@ -3,13 +3,20 @@
   width: 100%;
 }
 
+/* Grid rather than Infima's row/col: a stretched .col pins the card to the
+   line height, so a margin-bottom on the card overflows the column instead of
+   spacing the rows apart. A real gap does both axes at once. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
 /* The whole card is the link, so the screenshot and the arrow share one hit
    target and one hover state. */
 .card {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin-bottom: 2rem;
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: var(--ifm-global-radius);
   overflow: hidden;
@@ -67,5 +74,10 @@
 @media screen and (max-width: 996px) {
   .features {
     padding-top: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
