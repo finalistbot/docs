@@ -80,6 +80,17 @@ Each state change announces itself: to the scrim page in real time, and to any
 Within a scrim you create a **match**, the actual game instance, which carries the map and
 its own start and end. Matches are created once registration is closed.
 
+## The archive
+
+Once a scrim reaches `completed` or `cancelled` it drops out of the scrims list and into
+**Scrims → Archive**, newest first. The archive is scoped to the active organization and
+holds both outcomes, so a cancelled scrim stays on the record rather than disappearing.
+The summary card above the scrims list shows how many are archived and which one wrapped
+most recently.
+
+Players see a narrower version of the same thing: their archive lists **only completed**
+scrims, because a cancelled one was never played and carries no lineup or result.
+
 ## Delete vs. cancel
 
 Cancelling keeps the scrim and its history, and tells everyone. Deleting removes it. Cancel

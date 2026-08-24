@@ -1,10 +1,33 @@
 # Screenshot shot list
 
-Every image below currently exists as a **labelled placeholder**. Replace the file at the
-given path, keep the filename exactly, and the docs pick it up with no edits.
+Every image the docs reference exists on disk, so the site always builds. Some of those
+files are still **labelled placeholders**. Replace the file at the given path, keep the
+filename exactly, and the docs pick it up with no edits.
 
-Placeholders are 1280×720. Real screenshots don't have to match that, but keeping a
-consistent width (1280–1600) and a 16:9-ish crop makes the pages look even.
+A placeholder is exactly 1280×720 and says PLACEHOLDER across the top, so
+`find docs -name '*.png'` plus an image-size check tells you what's left. Real screenshots
+don't have to match 1280×720, but keeping a consistent width (1280–1600) and a 16:9-ish crop
+makes the pages look even.
+
+## Still placeholders
+
+**Needs the app, and multi-user or moderation state**
+
+| File | Blocked on |
+|------|-----------|
+| `docs/players/assets/saved-game-accounts.png` | **No UI ships this yet.** Alt accounts exist only on the API (`/users/@me/game-identity/:gameId/accounts`, `/users/@me/game-accounts/:id/primary`); neither the web app nor the bot calls them, and the web `GameIdentity` type carries no `label` or `is_primary`. Profile → Identities edits a single IGN per game. Unshootable until that lands — see the note in `docs/players/account.mdx`. |
+
+**Needs a real Discord server with the bot in it**
+
+| File | Blocked on |
+|------|-----------|
+| `docs/discord/assets/welcome-card.png` | The card only fires on join — use a throwaway server. |
+| `docs/discord/assets/claim-command.png` | `/claim` on an unclaimed server. |
+| `docs/discord/assets/register-button.png` | A registration-open announcement in a bound channel. |
+| `docs/discord/assets/room-details-reveal.png` | A slotted captain clicking reveal. |
+| `docs/discord/assets/tournament-command.png` | `/tournament standings` on an event with points. |
+
+Everything else in this file is a real screenshot.
 
 Tips:
 
@@ -94,7 +117,7 @@ Tips:
 | `submissions-queue.png` | The Submissions queue, with a captain's claim and its screenshot. |
 | `standings.png` | A stage's standings, ideally with the qualification cut visible. |
 | `prizes-payouts.png` | The Prizes tab: rank bands above, payout sheet below. |
-| `tournament-checkin.png` | A player checking their team in for a match, on the event page. |
+| `tournament-enter.png` | A team entering a tournament, on the event page. |
 
 ## New shots for `docs/players/assets/`
 
