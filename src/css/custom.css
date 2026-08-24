@@ -1,30 +1,145 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Finalist theme for Docusaurus.
+ *
+ * The source of truth is the app's design system:
+ * finalistbot/frontend → packages/ui/src/styles/globals.css. That file is
+ * Tailwind v4 (`@import "tailwindcss"` + `@theme inline`) and lives in a
+ * different repo, so it cannot be imported here — Docusaurus ships Infima.
+ * What follows is a hand-port of the same token VALUES onto Infima's
+ * variables, kept in oklch so the two can be diffed against each other.
+ *
+ * When a colour changes in the app, change it here too.
  */
 
-/* You can override the default Infima variables here. */
+/* ---------- Type ----------
+ * Clash Display for headings, Inter for body — the same pairing as the app.
+ * Both faces are loaded via `stylesheets` in docusaurus.config.ts.
+ */
 :root {
-  --ifm-color-primary: #7c3aed;
-  --ifm-color-primary-dark: #6d28d9;
-  --ifm-color-primary-darker: #6626cd;
-  --ifm-color-primary-darkest: #541fa9;
-  --ifm-color-primary-light: #8b5cf6;
-  --ifm-color-primary-lighter: #9670f7;
-  --ifm-color-primary-lightest: #b394fa;
+  --ifm-font-family-base: "Inter", "Space Grotesk", system-ui, sans-serif;
+  --ifm-heading-font-family: "Clash Display", "Archivo", sans-serif;
+  --ifm-heading-font-weight: 600;
+
+  /* ELVNT base radius = 12px, matching buttons/inputs in the app. */
+  --ifm-global-radius: 0.75rem;
+
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #a78bfa;
-  --ifm-color-primary-dark: #8b5cf6;
-  --ifm-color-primary-darker: #7f4df5;
-  --ifm-color-primary-darkest: #6429f2;
-  --ifm-color-primary-light: #c3b0fc;
-  --ifm-color-primary-lighter: #cfc0fd;
-  --ifm-color-primary-lightest: #e3dbfe;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* ---------- Light theme (violet brand on warm neutral) ---------- */
+:root {
+  /* ELVNT primary #7C3AED. The ramp walks lightness in oklch and holds
+     chroma/hue, so every step is the same violet rather than seven hand-picked
+     hexes that drift apart. */
+  --ifm-color-primary: oklch(0.5413 0.2466 293.01);
+  --ifm-color-primary-dark: oklch(0.4872 0.2466 293.01);
+  --ifm-color-primary-darker: oklch(0.4601 0.2466 293.01);
+  --ifm-color-primary-darkest: oklch(0.3789 0.2466 293.01);
+  --ifm-color-primary-light: oklch(0.5954 0.2331 293.01);
+  --ifm-color-primary-lighter: oklch(0.6225 0.2189 293.01);
+  --ifm-color-primary-lightest: oklch(0.7037 0.1702 293.01);
+
+  /* Surfaces: --background / --card in the app. */
+  --ifm-background-color: oklch(0.99 0.002 286);
+  --ifm-background-surface-color: oklch(1 0 0);
+  --ifm-card-background-color: oklch(1 0 0);
+  --ifm-navbar-background-color: oklch(1 0 0);
+
+  --ifm-font-color-base: oklch(0.17 0.012 286);
+  --ifm-heading-color: oklch(0.17 0.012 286);
+
+  /* Emphasis scale is Infima's one neutral ramp — borders, muted text and
+     hover fills all read off it, so it carries the app's --muted / --border. */
+  --ifm-color-emphasis-100: oklch(0.975 0.003 286);
+  --ifm-color-emphasis-200: oklch(0.965 0.004 286);
+  --ifm-color-emphasis-300: oklch(0.91 0.005 286);
+  --ifm-color-emphasis-400: oklch(0.83 0.008 286);
+  --ifm-color-emphasis-500: oklch(0.68 0.012 286);
+  --ifm-color-emphasis-600: oklch(0.6 0.013 286);
+  --ifm-color-emphasis-700: oklch(0.52 0.014 286);
+  --ifm-color-emphasis-800: oklch(0.35 0.013 286);
+  --ifm-color-emphasis-900: oklch(0.24 0.012 286);
+
+  --ifm-toc-border-color: oklch(0.91 0.005 286);
+  --ifm-hr-border-color: oklch(0.91 0.005 286);
+
+  /* Status roles, straight from the app's tokens. */
+  --ifm-color-success: oklch(0.6227 0.17 149.58);
+  --ifm-color-warning: oklch(0.8419 0.1684 90.43);
+  --ifm-color-danger: oklch(0.6368 0.2078 25.33);
+  --ifm-color-info: oklch(0.6231 0.188 259.81);
+
+  --docusaurus-highlighted-code-line-bg: oklch(0.91 0.005 286);
+}
+
+/* ---------- Dark theme (black-first, violet brand) ----------
+ * The app's primary surface. Note Docusaurus gates dark on
+ * [data-theme='dark'], not the `.dark` class the app uses — the block below is
+ * a port, not a copy-paste of globals.css.
+ */
+[data-theme="dark"] {
+  /* The one place this intentionally diverges from the app: #7C3AED at 0.54
+     lightness is a CTA colour, and body links need more contrast than that
+     against near-black. The ramp is lifted so links and inline code stay
+     readable; the deep violet still carries the buttons and the hero. */
+  --ifm-color-primary: oklch(0.723 0.146 293.01);
+  --ifm-color-primary-dark: oklch(0.668 0.171 293.01);
+  --ifm-color-primary-darker: oklch(0.641 0.184 293.01);
+  --ifm-color-primary-darkest: oklch(0.5413 0.2466 293.01);
+  --ifm-color-primary-light: oklch(0.778 0.118 293.01);
+  --ifm-color-primary-lighter: oklch(0.805 0.104 293.01);
+  --ifm-color-primary-lightest: oklch(0.887 0.058 293.01);
+
+  /* ELVNT neutrals: bg #0B0B0F < surface #121217 < elevated #1A1A20 */
+  --ifm-background-color: oklch(0.1515 0.0085 285.34);
+  --ifm-background-surface-color: oklch(0.1845 0.0101 285.36);
+  --ifm-card-background-color: oklch(0.1845 0.0101 285.36);
+  --ifm-navbar-background-color: oklch(0.1515 0.0085 285.34);
+
+  --ifm-font-color-base: oklch(0.9467 0.0027 286.35);
+  --ifm-heading-color: oklch(0.9467 0.0027 286.35);
+
+  --ifm-color-emphasis-100: oklch(0.1845 0.0101 285.36);
+  --ifm-color-emphasis-200: oklch(0.205 0.011 285.4);
+  --ifm-color-emphasis-300: oklch(0.2883 0.0145 285.46);
+  --ifm-color-emphasis-400: oklch(0.36 0.016 285.6);
+  --ifm-color-emphasis-500: oklch(0.48 0.018 285.7);
+  --ifm-color-emphasis-600: oklch(0.5677 0.0193 285.84);
+  --ifm-color-emphasis-700: oklch(0.6377 0.0193 285.84);
+  --ifm-color-emphasis-800: oklch(0.79 0.012 286);
+  --ifm-color-emphasis-900: oklch(0.9467 0.0027 286.35);
+
+  /* ELVNT border #2A2A32 — opaque and sharp, not a low-alpha white. */
+  --ifm-toc-border-color: oklch(0.2883 0.0145 285.46);
+  --ifm-hr-border-color: oklch(0.2883 0.0145 285.46);
+
+  --ifm-color-success: oklch(0.7227 0.192 149.58);
+  --ifm-color-warning: oklch(0.8419 0.1684 90.43);
+  --ifm-color-danger: oklch(0.6368 0.2078 25.33);
+  --ifm-color-info: oklch(0.6231 0.188 259.81);
+
+  --docusaurus-highlighted-code-line-bg: oklch(0.2205 0.0116 285.41);
+}
+
+/* ---------- Shared details the app is recognisable by ---------- */
+
+/* Clash Display is a display face: it wants to sit slightly tight. The app's
+   `.tracking-heading` utility also adds word-spacing, but that exists for
+   uppercase esports headings — docs headings are sentence case and would look
+   gappy with it. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--ifm-color-primary) 30%, transparent);
+  color: var(--ifm-font-color-base);
+}
+
+/* Kill the grey tap flash on touch — the single biggest tell that a UI is a
+   webpage rather than an app. */
+html {
+  -webkit-tap-highlight-color: transparent;
 }

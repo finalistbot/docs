@@ -15,8 +15,11 @@ const config: Config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  // Set the production url of your site here
-  url: "https://finalistbot.github.io",
+  // The site is served from the custom domain, not the Pages default. This has
+  // to be the domain people actually land on: Docusaurus builds every canonical
+  // URL, og:url and og:image from it, and pointing them at finalistbot.github.io
+  // while the content lives at docs.finalist.live splits the two hosts in search.
+  url: "https://docs.finalist.live",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -35,6 +38,41 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+
+  // Font hosts are on separate origins and block first paint; warm the
+  // connections while the HTML is still parsing.
+  headTags: [
+    {
+      tagName: "link",
+      attributes: { rel: "preconnect", href: "https://api.fontshare.com" },
+    },
+    {
+      tagName: "link",
+      attributes: { rel: "preconnect", href: "https://fonts.googleapis.com" },
+    },
+    {
+      tagName: "link",
+      attributes: {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossorigin: "anonymous",
+      },
+    },
+  ],
+
+  // Brand faces, the same pairing and the same sources as the app: Clash Display
+  // for headings (Fontshare — there is no npm package), Inter for body.
+  // src/css/custom.css points --ifm-heading-font-family at them.
+  stylesheets: [
+    {
+      href: "https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap",
+      type: "text/css",
+    },
+    {
+      href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
+      type: "text/css",
+    },
+  ],
 
   presets: [
     [
@@ -69,7 +107,11 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/finalist.png",
     colorMode: {
-      defaultMode: "light",
+      // The app is dark-first — the marketing site is hardcoded dark and can't
+      // even be switched — so the docs open dark to match. A visitor whose OS
+      // says light still gets light; this only decides the no-preference case.
+      defaultMode: "dark",
+      respectPrefersColorScheme: true,
     },
     navbar: {
       title: "Finalist",

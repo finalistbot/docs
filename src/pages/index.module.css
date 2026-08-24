@@ -4,21 +4,41 @@
  */
 
 /* The hero paints itself rather than borrowing --ifm-color-primary: that token
-   is a pale lavender in dark mode, which turned the band into a light stripe
-   across a dark page and left the outline button barely visible. One deep
-   violet reads correctly in both themes. */
+   is lifted to a pale lavender in dark mode for link contrast, which would turn
+   the band into a light stripe across a dark page and leave the outline button
+   barely visible. These two stops are the app's own primary and its darkest
+   ramp step, so the band reads as brand in both themes. */
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+  background: linear-gradient(
+    135deg,
+    oklch(0.5413 0.2466 293.01) 0%,
+    oklch(0.3789 0.2466 293.01) 100%
+  );
   color: #fff;
 }
 
 .heroBanner :global(.hero__title),
 .heroBanner :global(.hero__subtitle) {
   color: #fff;
+}
+
+/* Same reason as the title above: the band is violet in both themes, so the
+   outline button has to be painted for the band and not for the page. Infima's
+   secondary resolves to a near-black in light mode, which left the label barely
+   legible against the violet. */
+.heroBanner :global(.button--outline.button--secondary) {
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.7);
+}
+
+.heroBanner :global(.button--outline.button--secondary:hover) {
+  color: oklch(0.3789 0.2466 293.01);
+  background-color: #fff;
+  border-color: #fff;
 }
 
 @media screen and (max-width: 996px) {
