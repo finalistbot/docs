@@ -1,0 +1,19 @@
+/* aspect-ratio rather than the padding-top box: the only thing that trick
+   bought was pre-2021 browsers, and it forces the iframe into absolute
+   positioning for no reason. */
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: #000;
+}
+
+.frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}

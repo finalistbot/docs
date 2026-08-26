@@ -106,3 +106,28 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* The walkthrough, between the audience router and the feature screenshots.
+   Capped narrower than the container: a full-width 16:9 player on a desktop
+   monitor is taller than the viewport, which pushes everything below it out of
+   sight. */
+.video {
+  padding: 2.5rem 0 0.5rem;
+  text-align: center;
+}
+
+.videoTitle {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.videoBody {
+  margin: 0 auto 1.5rem;
+  max-width: 52ch;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.videoFrame {
+  margin: 0 auto;
+  max-width: 760px;
+}

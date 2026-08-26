@@ -4,6 +4,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import YouTubeEmbed from "@site/src/components/YouTubeEmbed";
 import Heading from "@theme/Heading";
 import { links } from "@site/constants";
 
@@ -80,6 +81,31 @@ function HomepagePaths() {
   );
 }
 
+// Under the audience router, above the feature screenshots: whoever didn't
+// pick a path off the three cards gets the whole product in one sitting
+// instead of leaving.
+function HomepageVideo() {
+  return (
+    <section className={styles.video}>
+      <div className="container">
+        <Heading as="h2" className={styles.videoTitle}>
+          Watch the walkthrough
+        </Heading>
+        <p className={styles.videoBody}>
+          Hosting a scrim end to end — create it, open registration, assign
+          slots, send room details, declare results.
+        </p>
+        <div className={styles.videoFrame}>
+          <YouTubeEmbed
+            id={links.tutorialVideoId}
+            title="Finalist walkthrough: hosting a scrim end to end"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
@@ -90,6 +116,7 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <main>
         <HomepagePaths />
+        <HomepageVideo />
         <HomepageFeatures />
       </main>
     </Layout>
