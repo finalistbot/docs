@@ -10,7 +10,12 @@ export const links = {
   tutorialVideo: "https://youtu.be/s1ULlJLspR0",
 
   // The three surfaces of the platform.
-  web: "https://finalist.live",
-  play: "https://play.finalist.live",
-  manage: "https://app.finalist.live",
+  //
+  // Tagged so the platform can tell docs traffic apart from everything else.
+  // The tags are read once, on landing, into a first-party cookie and then
+  // dropped — see packages/app-shell/src/lib/attribution.ts in the frontend
+  // repo. Without them every arrival from here counts as "referral" at best.
+  web: "https://finalist.live?utm_source=docs&utm_medium=referral",
+  play: "https://play.finalist.live?utm_source=docs&utm_medium=referral",
+  manage: "https://app.finalist.live?utm_source=docs&utm_medium=referral",
 };
