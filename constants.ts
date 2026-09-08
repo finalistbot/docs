@@ -1,11 +1,12 @@
 export const links = {
-  // The platform's own install route, not a hand-written Discord URL. It was
-  // one: a retired application id asking for **Administrator**, which is the
-  // worst possible first impression and had drifted out of sync with the bot
-  // twice over. Redirecting through the backend means the client id, the
-  // permission mask and the `identify` scope that records who added the bot all
-  // come from one place — internal/app/comms/discord_connect.go.
-  botInvite: "https://api.finalist.live/api/v1/discord/install",
+  // Adding the bot starts on the dashboard, not on a Discord authorize screen.
+  // It used to be a hand-written OAuth URL carrying a retired application id and
+  // asking for **Administrator** — the worst possible first impression, and out
+  // of sync with the bot twice over. It also dropped people into a server with
+  // an install nobody could do anything with: an organization is what a server
+  // connects to, and that is made here.
+  botInvite:
+    "https://app.finalist.live/organizations?utm_source=docs&utm_medium=referral",
   supportServer: "https://discord.gg/4u3pF8XH3W",
   github: "https://github.com/finalistbot/finalist",
   youtube: "https://www.youtube.com/@finalistbot",

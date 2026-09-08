@@ -4,20 +4,23 @@ sidebar_position: 3
 
 # Command reference
 
-Three commands work everywhere: `/link`, `/help` and `/claim`. Every other group is
-installed into a server only while that server is
-[connected to an organization](./connect-server), and is removed again on disconnect.
+Most of the bot answers with **no Finalist account and no organization**: browsing scrims
+and tournaments, reading standings, looking at a roster. An account is asked for at the
+point you *enter* something, and an organization only for the organizer surface.
 
-Most commands also need your Discord account [linked](./link-account) to a Finalist
-account. The bot will tell you if it isn't.
+| You want to | You need |
+|-------------|----------|
+| Browse, look at a scrim, read standings | Nothing |
+| Enter a scrim, check in, see your own stats | `/link` |
+| This server's own scrims, leaderboard and org info | The server [connected to an organization](./connect-server) |
+| `/host` | To be an owner or admin of that organization |
 
 ## Always available
 
 | Command | Options | What it does |
 |---------|---------|--------------|
-| `/link` | None | Links your Discord to your Finalist account, or confirms it is already linked. |
+| `/link` | None | Links your Discord to your Finalist account — one tap, no form. |
 | `/help` | `command` (optional) | Browse what the bot can do. Pass a command name for detail. |
-| `/claim` | None | Takes ownership of this server's organization. Needs **Manage Server**. |
 
 ![The /help landing embed](./assets/help-command.png)
 
@@ -26,9 +29,9 @@ category, and `/help command:<name>` jumps straight to one. Four link buttons si
 **Support Server**, **Invite Me**, **Documentation** and **Tutorials** — *Invite Me* is the
 quickest way to add the bot to another server.
 
-`/claim` is global for a reason: a server that has just had the bot added has no
-organization yet — `/claim` is what creates it — so the command has to work before anything
-else does. See [Connect your server](./connect-server).
+In a server with no organization connected, `/scrim list` and `/tournament list` show every
+public event on the platform rather than refusing — so the bot is useful the moment it
+joins. See [Connect your server](./connect-server).
 
 ## `/scrim`: browse and enter scrims
 
@@ -76,7 +79,7 @@ you're actually in.
 | Command | Options | What it does |
 |---------|---------|--------------|
 | `/team mine` | None | Your teams and their rosters. |
-| `/team view` | `team_id` (required) | A team's roster. The captain is marked with a crown. |
+| `/team view` | `code` (required) | A team's roster, by its team code. The captain is marked with a crown. |
 | `/team create` | None | Sends you to the web app. The bot doesn't create teams itself. |
 
 ## `/me`: your stats and profile

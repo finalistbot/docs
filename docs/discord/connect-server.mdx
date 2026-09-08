@@ -11,9 +11,10 @@ Scrims are created and managed on <a href={links.manage}>app.finalist.live</a>; 
 brings announcements, room details and quick lookups into your Discord server.
 
 Every server that uses Finalist is backed by an **organization**, because scrims belong to
-an org and never to a person. How you get one depends on whether you already have one.
+an org and never to a person. You create the organization on the dashboard, then connect
+your server to it — one direction, one place, nothing to claim afterwards.
 
-## Invite the bot
+## Add the bot
 
 Two ways, and they add the same bot:
 
@@ -25,78 +26,58 @@ Two ways, and they add the same bot:
 Pick your server, keep the permissions it asks for, and confirm. You need **Manage Server**
 on that server — that part is Discord's rule, not ours.
 
-## If you don't have an organization yet
+The bot asks for very little: view channels, send messages, embed links and read message
+history. Everything that changes your server — handing out roles, locking channels, wearing
+a nickname — is granted later, per server, and only if you turn that feature on. See
+[Bot permissions](#bot-permissions).
 
-Inviting the bot is the whole setup.
+## Connect the server to an organization
 
-Finalist records the install and links it to your server, but it does **not** create an
-organization yet. The organization is created by **whoever claims the server** — so a
-drive-by install leaves a pending link and nothing else, rather than an ownerless org
-nobody asked for.
+Adding the bot doesn't create anything. Connect it from the dashboard:
 
-Until someone claims it, the server sits in a **pending** state: the bot knows about it,
-and the organizer commands answer "this server isn't claimed yet".
-
-### Claim it
-
-Whoever added the bot is recorded as the **pending owner**. Finalist works that out from
-the server's audit log, which is the reason the invite asks for **View Audit Log**. If it
-can't read the log, it falls back to the server's owner.
-
-The bot helps you along:
-
-- A **welcome card** is posted when it joins, carrying a **Claim this server** button.
-- The person who added it gets the same thing as a DM.
-- If nobody claims it, Finalist follows up later with a reminder DM to the inviter and the
-  server owner. It stops chasing someone whose DMs are closed.
-
-![The welcome card, with Claim this server](./assets/welcome-card.png)
-
-There are two ways to claim, and the first valid one wins:
-
-**In Discord**, run `/claim`. Any member with **Manage Server** can, not just the inviter.
-The organization is created there and then, named after the server, owned by the Finalist
-account linked to their Discord. No account at all? The reply carries a one-tap link that
-makes one and claims the server in the same step.
-
-![Claiming the server's organization with /claim](./assets/claim-command.png)
-
-**On the web**, sign in with the Discord account that added the bot. The server shows up as
-claimable and you take it in one click.
-
-Either way you end up the **owner** of an ordinary organization: invite members, give them
-roles, and [hand ownership on](../organizers/organizations#transferring-ownership) later if
-you want.
-
-## If you already have an organization
-
-Start from the dashboard instead, so the server joins the org you already have rather than
-getting one of its own.
-
-1. Open your organization on <a href={links.manage}>app.finalist.live</a>.
+1. Open <a href={links.manage}>app.finalist.live</a> and create your organization if you
+   don't have one yet.
 2. Go to **Settings → Discord**.
 3. Press **Connect Discord**, pick your server, and confirm.
 
 ![Settings → Discord, with no server connected yet](./assets/org-discord-settings.png)
 
-That button invites the bot for you: it's the same invite, carrying the knowledge of which
-organization the server should end up in. So there's nothing to claim afterwards — the server
-is linked to your org the moment the bot lands.
+That button carries the knowledge of which organization the server belongs to, so the
+server is linked to your org the moment it completes.
 
-A server belongs to exactly one organization. Trying to connect one that another org already
-owns is rejected.
+A server belongs to exactly one organization. Trying to connect one that another org
+already owns is rejected. You can connect more than one server to the same organization,
+and every connected server gets the same announcements.
 
-You can connect more than one server to the same organization, and every connected server
-gets the same announcements.
+## What the bot does before it's connected
 
-## What the bot can do before it's connected
+Quite a lot, actually — you don't have to connect anything to start using it.
 
-Until a server is linked to an organization, the bot only exposes `/link`, `/help` and
-`/claim`. Everything else (`/scrim`, `/team`, `/me`, `/org`, `/host`) appears the moment
-the link exists, and disappears again if you disconnect.
+`/help`, `/scrim list`, `/scrim view`, `/scrim results`, `/tournament info`,
+`/tournament standings` and `/team view` all work with no organization and **no Finalist
+account**. In a server with no organization connected, the list commands show every public
+scrim and tournament on the platform, so there is always something to look at.
 
-A pending install has no organization behind it yet, so those commands stay dark until
-somebody claims the server. Claim first, then everything else.
+`/link` connects your account when you want to enter something — one tap, no form.
+
+What needs the server connected is the organizer surface: `/host`, and the announcements
+that get posted into your channels. `/org info` and `/org leaderboard` need it too, since
+they are about *this server's* organization.
+
+## Bot permissions {#bot-permissions}
+
+Three features change your server, and each needs a permission the install deliberately
+does not ask for:
+
+| Feature | Needs | Without it |
+|---------|-------|------------|
+| Participant roles, and locking a channel when registration closes | Manage Roles | Roles aren't handed out or taken back, and channels don't lock or unlock. |
+| Pinging a bound role on announcements | Mention @everyone | Announcements still post, but a role that isn't set mentionable won't notify. |
+| The bot's nickname in your server | Change Nickname | The nickname isn't applied. |
+
+These fail quietly on purpose — a missing permission must never break a scrim mid-event —
+so the dashboard is where you find out. **Settings → Discord** lists each feature, what it
+needs, and a **Grant permissions** button that re-authorizes just that server.
 
 ## Choose where announcements are posted
 

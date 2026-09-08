@@ -28,8 +28,8 @@ One captain per team, and the captain cannot leave, only delete.
 Membership is by invitation only. Invites expire after 7 days.
 
 An owner can hand the org to any existing member; doing so leaves the outgoing owner in the
-org as an admin. An org created by inviting the bot to a Discord server starts with **no
-owner** until somebody [claims](../discord/connect-server) it.
+org as an admin. Every organization has an owner from the moment it is created — the person
+who created it on the dashboard.
 
 ## In a tournament
 
@@ -78,13 +78,13 @@ This surprises people in both directions:
 - An org admin can use `/host` **without** Discord's Manage Server permission.
 - A Discord server administrator who isn't in the organization **cannot** use `/host` at all.
 
-Discord's Manage Server permission is needed for the two things Discord itself governs:
-inviting the bot to the server, and `/claim`, which turns a server's unclaimed organization
-over to the person running it. Every other check is a platform check.
+Discord's Manage Server permission is needed only for the thing Discord itself governs:
+adding the bot to the server. Every other check is a platform check.
 
-Meanwhile, `/scrim`, `/team`, `/me` and `/org` need only a
-[linked account](../discord/link-account) in a
-[connected server](../discord/connect-server).
+Meanwhile most of `/scrim`, `/tournament` and `/team` need nothing at all — browsing and
+reading work without an account. `/me`, entering a scrim and checking in need a
+[linked account](../discord/link-account); `/org` and `/host` need the server
+[connected to an organization](../discord/connect-server).
 
 ## Bans
 

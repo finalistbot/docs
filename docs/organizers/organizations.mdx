@@ -11,9 +11,9 @@ need one, and if you're on a team with other admins, the org is what you share.
 
 ## Create one
 
-There are two ways to get an organization, and they differ in where you start.
-
-### On the web
+Organizations are created in one place: the dashboard. Adding the bot to a Discord server
+creates nothing — that install is recorded and waits, and you connect it to an org you
+already own.
 
 On <a href={links.manage}>app.finalist.live</a>, create an organization with a name and a
 **slug**. The slug is lowercase and unique, and it becomes your public address:
@@ -24,20 +24,11 @@ https://finalist.live/o/your-slug
 
 ![Creating an organization](./assets/create-org.png)
 
-You are the **owner** of any org you create this way.
+You are the **owner** of any org you create.
 
-### From Discord
+### Connecting a Discord server
 
-Invite the bot to a Discord server, then **claim** it — with `/claim` in Discord, or from
-the web with the Discord account that added the bot. Claiming is what creates the
-organization: named after the server, with a slug derived from that name, owned by whoever
-claimed it.
-
-Inviting the bot on its own creates nothing. The install is recorded and the server sits
-**pending** until somebody claims it, which is why a drive-by install never leaves you
-owning an org you didn't ask for.
-
-This is the shortest path from nothing to hosting, and it's covered in
+Once you have an organization, connect a server to it from **Settings → Discord**. See
 [Connect your server](../discord/connect-server).
 
 ### Your public page
@@ -64,7 +55,7 @@ Members join by **invitation only**. There's no request-to-join flow, and no pub
 | **Moderator** | A limited set of moderation actions. |
 
 There is exactly one owner at a time, and an organization always has one — the account that
-created it, or the account that claimed the Discord server it came from.
+created it.
 
 ![Organization members and their roles](./assets/org-members.png)
 
@@ -112,7 +103,7 @@ Players report each other from inside your scrims, and those reports land in **y
 
 ## Audit log
 
-Every consequential action is recorded: org created, claimed or updated, ownership transferred,
+Every consequential action is recorded: org created or updated, ownership transferred,
 member roles changed, members removed, invites sent, accepted, declined or cancelled, and every
 ban and unban. Each entry records who did it and when.
 
