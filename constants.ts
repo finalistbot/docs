@@ -7,7 +7,7 @@ export const links = {
   // connects to, and that is made here.
   botInvite:
     "https://app.finalist.live/organizations?utm_source=docs&utm_medium=referral",
-  supportServer: "https://discord.gg/4u3pF8XH3W",
+  supportServer: "https://discord.gg/Stqp8ZtT2s",
   github: "https://github.com/finalistbot/finalist",
   youtube: "https://www.youtube.com/@finalistbot",
   // The walkthrough video, embedded on the front page and in Getting Started.
